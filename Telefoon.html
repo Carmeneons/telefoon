@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telefoon Telefoon Telefoon</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Vollkorn&display=swap" rel="stylesheet">
+
+    <style>
+        .card {
+            font-weight: 400;
+            border: 0;
+            -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+            box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+        }
+
+        th {
+            font-weight: 400;
+        }
+
+        .table {
+            padding: 2rem;
+            font-family: "Roboto", sans-serif;
+            font-size: 1 rem;
+            line-height: 1.6;
+            color: #e2e2e2;
+        }
+
+        .pause {
+            padding: 0rem 0.5rem !important;
+            background-color: #f0f0f0 !important;
+        }
+
+        .hour {
+            border-left-width: 1px;
+            font-size: 0.8rem;
+        }
+
+        .hour.clicked {
+            background-color: #ddffe2;
+        }
+
+        .hour.clicked:hover {
+            background-color: #d3ffd9;
+        }
+
+        .hour:not(.hour.clicked):hover {
+            background-color: #fbfbfb;
+        }
+
+        #time {
+            font-size: 2rem;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg">
+        <h1 class="m-4">Telefoon</h1>
+        <button class="navbar-toggler" data-bs-target="#my-nav" data-bs-toggle="collapse" aria-controls="my-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>
+    
+    <div class="container">
+        <div class="row mt-3">
+            <div class="col">
+                <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/WVdbkSvTn0M?si=KSwY-dIbIGQ1A5bj&amp;start=770" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> -->
+                <div id="player"></div>
+            </div>
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+                        <div class="card mb-3">
+                            <div class="card-header">
+                                Quote
+                            </div>
+                            <div class="card-body">
+                                <blockquote class="blockquote mb-0">
+                                    <p>Telefoon telefoon telefoon telefoon telefoon telefoon telefoon–telefoon telefoon telefoon telefoon telefoon telefoon telefoon–telefoon telefoon telefoon telefoon telefoon telefoon telefoon–telefoon telefoon telefoon telefoon telefoon telefoon telefoon.</p>
+                                    <footer class="blockquote-footer">Herman Finkers</footer>
+                                </blockquote>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">De Telefoon Knop</h5>
+                                <p class="card-text">Klik hier om alleen het telefoon stukje af te spelen. (10 seconden)</p>
+                                <button type="button" class="btn btn-primary" id="play">
+                                    Speel af!
+                                </button>
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalCenter">
+                                    Alarm Rooster
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="modalCenter" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Alarm Rooster</h5>
+
+                                                <div class=" col-md-4">
+                                                    <label for="rosterType">Rooster Type</label>
+                                                    <select id="rosterType" class="form-control">
+                                                        <option value="60" selected>60 minuten</option>
+                                                        <option value="45">45 minuten</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="modal-body">
+                                                <table class="table">
+                                                    <thead class="thead-light">
+                                                        <tr>
+                                                            <th></th>
+                                                            <th>Ma</th>
+                                                            <th>Di</th>
+                                                            <th>Wo</th>
+                                                            <th>Do</th>
+                                                            <th>Vr</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr class="hours" data-hour="1">
+                                                            <th>1e uur</th>
+                                                            <td class="hour"></td>
+                                                            <td class="hour"></td>
+                                                            <td class="hour"></td>
+                                                            <td class="hour"></td>
+                                                            <td class="hour"></td>
+                                                        </tr>
+                                                        <tr class="hours" data-hour="2">
+                                                            <th>2e uur</th>
+                                                            <td class="hour"></td>
+                                                            <td class="hour"></td>
+                                                            <td class="hour"></td>
+                                                            <td class="hour"></td>
+                                                            <td class="hour"></td>
+                                                        </tr>
+                                                        <tr class="breaks" data-break="1">
+                                                            <th class="pause">Pauze</th>
+                                                            <td class="pause"></td>
+                                                            <td class="pause"></td>
+                                                            <td class="pause"></td>
+                                                            <td class="pause"></td>
+                                                            <td class="pause"></td>
+                                                        </tr>
+                                                        <tr class="hours" data-hour="3">
+                                                            <th>3e uur</th>
+                                                            <td class="hour"></td>
+                                                            <td class="hour"></td>
+                                                            <td class="hour"></td>
+                                                            <td class="hour"></td>
+                                                            <td class="hour"></td>
+                                                        </tr>
+                                                        <tr class="hours" data-hour="4">
+                                                            <th>4e uur</th>
+                                                            <td class="hour"></td>
+                                                            <td class="hour"></td>
+                                                            <td class="hour"></td>
+                                                            <td class="hour"></td>
+                                                            <td class="hour"></td>
+                                                        </tr>
+                                                        <tr class="breaks" data-break="2">
+                                                            <th class="pause">Pauze</th>
+                                                            <td class="pause"></td>
+                                                            <td class="pause"></td>
+                                                            <td class="pause"></td>
+                                                            <td class="pause"></td>
+                                                            <td class="pause"></td>
+                                                        </tr>
+                                                        <tr class="hours" data-hour="5">
+                                                            <th>5e uur</th>
+                                                            <td class="hour"></td>
+                                                            <td class="hour"></td>
+                                                            <td class="hour"></td>
+                                                            <td class="hour"></td>
+                                                            <td class="hour"></td>
+                                                        </tr>
+                                                        <tr class="hours" data-hour="6">
+                                                            <th>6e uur</th>
+                                                            <td class="hour"></td>
+                                                            <td class="hour"></td>
+                                                            <td class="hour"></td>
+                                                            <td class="hour"></td>
+                                                            <td class="hour"></td>
+                                                        </tr>
+                                                        <tr class="breaks" data-break="3">
+                                                            <th class="pause">Pauze</th>
+                                                            <td class="pause"></td>
+                                                            <td class="pause"></td>
+                                                            <td class="pause"></td>
+                                                            <td class="pause"></td>
+                                                            <td class="pause"></td>
+                                                        </tr>
+                                                        <tr class="hours" data-hour="7">
+                                                            <th>7e uur</th>
+                                                            <td class="hour"></td>
+                                                            <td class="hour"></td>
+                                                            <td class="hour"></td>
+                                                            <td class="hour"></td>
+                                                            <td class="hour"></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-danger" id="reset">Reset</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Tijd Tot Volgende</h5>
+                                <p class="card-text"><span id="time">0d | 00 : 00 : 00</span></p>
+                                <button type="button" class="btn btn-primary" id="play">
+                                    Speel af!
+                                </button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+        </div>
+    </div>
+
+    <script>
+        var is45 = false;
+        var data = [
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0]
+        ];
+        var minuteMargin = 0;
+        //row then column 
+
+        function roster(i, t) {
+            document.querySelector(`.hours[data-hour='${i}']`).querySelectorAll(".hour").forEach((e, k) => {
+                e.innerText = t;
+                //updates
+                if (data[i - 1][k] == 1) {
+                    e.classList.add("clicked");
+                } else {
+                    e.classList.remove("clicked");
+                }
+            });
+        }
+
+        function updateHours() {
+            document.querySelectorAll(".hours").forEach((e, hour) => {
+                e.querySelectorAll(".hour").forEach((e, day) => {
+                    data[hour][day] = e.classList.contains("clicked") ? 1 : 0;
+                });
+            });
+        }
+
+        function updateHourElements() {
+            updateMargin();
+            document.querySelectorAll(".hours").forEach((e, hour) => {
+                e.querySelectorAll(".hour").forEach((e, day) => {
+                    if (data[hour][day] == 1) {
+                        e.classList.add("clicked");
+                    } else {
+                        e.classList.remove("clicked");
+                    }
+                });
+            });
+        }
+
+        function updateMargin() {
+            if (!is45) {
+                document.querySelector('.breaks[data-break="3"]').style.display = "";
+                roster(1, `08:${30 + minuteMargin}`);
+                roster(2, `09:${30 + minuteMargin}`);
+                roster(3, `10:${45 + minuteMargin}`);
+                roster(4, `11:${45 + minuteMargin}`);
+                roster(5, `13:${15 + minuteMargin}`);
+                roster(6, `14:${15 + minuteMargin}`);
+                roster(7, `15:${30 + minuteMargin}`);
+            } else {
+                document.querySelector('.breaks[data-break="3"]').style.display = "none";
+                roster(1, `08:${30 + minuteMargin}`);
+                roster(2, `09:${15 + minuteMargin}`);
+                roster(3, `10:${15 + minuteMargin}`);
+                roster(4, `${(minuteMargin < 0) ? 10 : 11}:${(minuteMargin < 0) ? (60 + minuteMargin) : minuteMargin.toString()+"0"}`); //hhaa
+                roster(5, `12:${15 + minuteMargin}`);
+                roster(6, `${(minuteMargin < 0) ? 12 : 13}:${(minuteMargin < 0) ? (60 + minuteMargin) : minuteMargin.toString()+"0"}`); //haaa
+                roster(7, `13:${45 + minuteMargin}`);
+            }
+        }
+
+        updateMargin();
+
+        document.querySelectorAll(".hour").forEach((e) => {
+            e.addEventListener("click", (ev) => {
+                e.classList.toggle("clicked");
+                updateHours();
+            });
+        });
+
+        document.querySelector("#reset").addEventListener("click", (e) => {
+            data = [
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0]
+            ];
+            updateHourElements();
+        });
+
+        document.querySelector("#rosterType").addEventListener("input", (e) => {
+            if (document.querySelector("#rosterType").value == "45") {
+                is45 = true;
+            } else {
+                is45 = false;
+            }
+            updateHourElements();
+        });
+
+        document.querySelector("#play").addEventListener("click", (e) => {
+            player.loadVideoById({
+                'videoId': 'WVdbkSvTn0M',
+                'startSeconds': 770,
+                'endSeconds': 790
+            });
+        });
+
+        const timeElement = document.querySelector("#time");
+        var timerUpdater = setInterval(() => {
+            var smallestDelta;
+            var theTime = [0, 0, 0];
+            let date = new Date;
+            //if (date.getDay() > 0 && date.getDay() < 6) {// change
+            if (true) {
+                data.forEach((v, h) => {
+                    v.forEach((w, d) => {
+                        if (w == 1) {
+                            let dday = (d + 1 - date.getDay());
+                            if (dday < 0) {
+                                dday += 7;
+                            } //day 
+                            let minutes = (date.getHours() * 60 + date.getMinutes());
+                            let dminute;
+                            if (!is45) {
+                                switch (h) {
+                                    case 0:
+                                        dminute = 510 + minuteMargin - minutes;
+                                        break;
+                                    case 1:
+                                        dminute = 570 + minuteMargin - minutes;
+                                        break;
+                                    case 2:
+                                        dminute = 645 + minuteMargin - minutes;
+                                        break;
+                                    case 3:
+                                        dminute = 705 + minuteMargin - minutes;
+                                        break;
+                                    case 4:
+                                        dminute = 795 + minuteMargin - minutes;
+                                        break;
+                                    case 5:
+                                        dminute = 855 + minuteMargin - minutes;
+                                        break;
+                                    case 6:
+                                        dminute = 930 + minuteMargin - minutes;
+                                        break;
+                                    default:
+                                        console.log("Something went wrong!");
+                                        break;
+                                }
+                            } else {
+                                switch (h) {
+                                    case 0:
+                                        dminute = 510 + minuteMargin - minutes;
+                                        break;
+                                    case 1:
+                                        dminute = 555 + minuteMargin - minutes;
+                                        break;
+                                    case 2:
+                                        dminute = 615 + minuteMargin - minutes;
+                                        break;
+                                    case 3:
+                                        dminute = 660 + minuteMargin - minutes;
+                                        break;
+                                    case 4:
+                                        dminute = 735 + minuteMargin - minutes;
+                                        break;
+                                    case 5:
+                                        dminute = 780 + minuteMargin - minutes;
+                                        break;
+                                    case 6:
+                                        dminute = 825 + minuteMargin - minutes;
+                                        break;
+                                    default:
+                                        console.log("Something went wrong!");
+                                        break;
+                                }
+                            }
+                            let tempDelta = dminute + dday * 24 * 60;
+                            if ((smallestDelta === undefined) || (tempDelta !== undefined && tempDelta > -1 && tempDelta < smallestDelta)) {
+                                smallestDelta = tempDelta;
+                                theTime[0] = (dminute < 0) ? (dday - 1) : dday;
+                                let chour = Math.floor(dminute/60);
+                                theTime[1] = (chour < 0) ? (24 + chour) : chour;
+                                let cminute = dminute % 60 - 1;
+                                theTime[2] = (cminute < 0) ? (60 + cminute) : cminute;
+                            }
+                        }
+                        //dday : dminute : dsecond
+                    });
+                });
+                if (smallestDelta !== undefined) {
+                    theTime[3] = 60 - date.getSeconds();
+                    timeElement.innerText = `${theTime[0]}d | ${(theTime[1] < 10) ? "0" + theTime[1].toString() : theTime[1]} : ${(theTime[2] < 10) ? "0" + theTime[2].toString() : theTime[2]} : ${(theTime[3] < 10) ? "0" + theTime[3].toString() : theTime[3]}`;
+                } else {
+                    timeElement.innerText = "0d | 00 : 00 : 00";
+                }
+            }
+        }, 500);
+
+
+        //player
+        var tag = document.createElement('script');
+
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        // 3. This function creates an <iframe> (and YouTube player)
+        //    after the API code downloads.
+        var player;
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '390',
+                width: '640',
+                videoId: 'WVdbkSvTn0M',
+                playerVars: {
+                    'playsinline': 1,
+                    'start': 770
+                },
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            event.target.playVideo();
+        }
+
+        function onPlayerStateChange(event) {}
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>
